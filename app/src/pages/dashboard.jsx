@@ -5,57 +5,51 @@ import { Button } from "src/components/Button"
 import { PostForm } from "src/components/PostForm"
 import { useBlog } from "src/context/Blog"
 import { useHistory } from 'react-router-dom'
+import { initial } from "lodash-es"
 
 
 
 export const Dashboard = () => {
-  const history = useHistory()
-  const [connecting, setConnecting] = useState(false)
-  const { connected,select } = useWallet()
-  const [postTitle, setPostTitle] = useState("")
-  const [postContent, setPostContent] = useState("")
+  const history = useHistory();
+  const [connecting, setConnecting] = useState(false);
+  const { connected, select } = useWallet();
+  const [postTitle, setPostTitle] = useState("");
+  const [postContent, setPostContent] = useState("");
 
   // Static Data
-  const user = {
-    name: "Linux",
-    avatar: "https://avatarfiles.alphacoders.com/283/thumb-28374.jpg",
-  }
-  const posts = []
+ 
+  const {user,initialized,initUser} = useBlog()
+  const posts = [];
 
-  const createPost = () => {
+  const createPost = () => {};
 
-  }
-
-  const showModal = false
-  const setShowModal = () => {
-
-  }
+  const showModal = false;
+  const setShowModal = () => {};
   /////////////////
 
   const onConnect = () => {
-    setConnecting(true)
-    select(PhantomWalletName)
-  }
+    setConnecting(true);
+    select(PhantomWalletName);
+  };
 
   useEffect(() => {
     if (user) {
-      setConnecting(false)
+      setConnecting(false);
     }
-  }, [user])
+  }, [user]);
 
   return (
     <div className="dashboard background-color overflow-auto h-screen">
       <header className="fixed z-10 w-full h-14  shadow-md">
         <div className="flex justify-between items-center h-full container">
           <h2 className="text-2xl font-bold">
-            <div className="bg-clip-text bg-gradient-to-br from-indigo-300 colorpink"
-            >
+            <div className="bg-clip-text bg-gradient-to-br from-indigo-300 colorpink">
               Triog
             </div>
           </h2>
           {connected ? (
             <div className="flex items-center">
-              <p className=" font-bold text-sm ml-2  capitalize underlinepink" >
+              <p className=" font-bold text-sm ml-2  capitalize underlinepink">
                 Home
               </p>
               <p className=" font-bold text-sm ml-2 capitalize mr-4 underlinepink">
@@ -69,14 +63,26 @@ export const Dashboard = () => {
               <p className=" font-bold text-sm ml-2 capitalize">
                 {user?.name}
               </p>
-              <Button
-                className="ml-3 mr-2"
-                onClick={() => {
-                  setShowModal(true)
-                }}
-              >
-                Create Post
-              </Button>
+              {initialized ? (
+                <Button
+                  className="ml-3 mr-2"
+                  onClick={() => {
+                    setShowModal(true)
+                  }}
+                >
+                  Create Post
+                </Button>
+              ) : (
+                <Button
+                  className="ml-3 mr-2"
+                  onClick={() => {
+                    initUser()
+                  }}
+                >
+                  Initialize User
+                </Button>
+              )}
+
             </div>
           ) : (
             <Button

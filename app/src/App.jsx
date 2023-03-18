@@ -7,7 +7,8 @@ import "./App.css"
 
 
 export const App = () => {
-const endpoint ="https://cold-stylish-pond.solana-devnet.discover.quiknode.pro/63fda65b3af2d9e4bfbb159b1511592662429d54/"
+ const endpoint ="https://solemn-thrilling-flower.solana-devnet.discover.quiknode.pro/a08880dd4ea846eafb13777918a60c2075a02381/"
+//const endpoint = "https://muddy-aged-panorama.solana-devnet.discover.quiknode.pro/0fe7822c98ade63f96ae1be8e82d17b26d57cacc/"
 const wallets = useMemo(
   () => [
     new PhantomWalletAdapter(),
