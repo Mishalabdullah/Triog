@@ -37,6 +37,7 @@ export const BlogProvider = ({ children }) => {
   const { publicKey } = useWallet();
   const [showModal, setShowModal] = useState(false);
   const [LastPostId, setLastPostId] = useState(0);
+  const [posts, setPosts] = useState([]);
 
   const program = useMemo(() => {
     if (anchorWallet) {
@@ -63,6 +64,8 @@ export const BlogProvider = ({ children }) => {
             setInitialized(true);
             setUser(user);
             setLastPostId(user.LastPostId);
+            const postAccount = await program.account.postAccount.all();
+            setPosts(postAccount);
           }
         } catch (err) {
           console.log("No User");
@@ -147,6 +150,7 @@ export const BlogProvider = ({ children }) => {
         showModal,
         setShowModal,
         createPost,
+        posts,
       }}
     >
       {children}

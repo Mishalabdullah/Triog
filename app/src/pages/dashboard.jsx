@@ -16,9 +16,15 @@ export const Dashboard = () => {
 
   // Static Data
 
-  const { user, initialized, initUser, showModal, setShowModal, createPost } =
-    useBlog();
-  const posts = [];
+  const {
+    user,
+    initialized,
+    initUser,
+    showModal,
+    setShowModal,
+    createPost,
+    posts,
+  } = useBlog();
 
   const onConnect = () => {
     setConnecting(true);
