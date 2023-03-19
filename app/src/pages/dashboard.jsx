@@ -1,13 +1,11 @@
-import { useWallet } from "@solana/wallet-adapter-react"
-import { PhantomWalletName } from "@solana/wallet-adapter-wallets"
-import { useEffect, useState } from "react"
-import { Button } from "src/components/Button"
-import { PostForm } from "src/components/PostForm"
-import { useBlog } from "src/context/Blog"
-import { useHistory } from 'react-router-dom'
-import { initial } from "lodash-es"
-
-
+import { useWallet } from "@solana/wallet-adapter-react";
+import { PhantomWalletName } from "@solana/wallet-adapter-wallets";
+import { useEffect, useState } from "react";
+import { Button } from "src/components/Button";
+import { PostForm } from "src/components/PostForm";
+import { useBlog } from "src/context/Blog";
+import { useHistory } from "react-router-dom";
+import { initial } from "lodash-es";
 
 export const Dashboard = () => {
   const history = useHistory();
@@ -17,15 +15,10 @@ export const Dashboard = () => {
   const [postContent, setPostContent] = useState("");
 
   // Static Data
- 
-  const {user,initialized,initUser} = useBlog()
+
+  const { user, initialized, initUser, showModal, setShowModal, createPost } =
+    useBlog();
   const posts = [];
-
-  const createPost = () => {};
-
-  const showModal = false;
-  const setShowModal = () => {};
-  /////////////////
 
   const onConnect = () => {
     setConnecting(true);
@@ -60,14 +53,12 @@ export const Dashboard = () => {
                 alt="avatar"
                 className="w-8 h-8 rounded-full bg-gray-200 shadow ring-2 ring-indigo-400 ring-offset-2 ring-opacity-50"
               />
-              <p className=" font-bold text-sm ml-2 capitalize">
-                {user?.name}
-              </p>
+              <p className=" font-bold text-sm ml-2 capitalize">{user?.name}</p>
               {initialized ? (
                 <Button
                   className="ml-3 mr-2"
                   onClick={() => {
-                    setShowModal(true)
+                    setShowModal(true);
                   }}
                 >
                   Create Post
@@ -76,13 +67,12 @@ export const Dashboard = () => {
                 <Button
                   className="ml-3 mr-2"
                   onClick={() => {
-                    initUser()
+                    initUser();
                   }}
                 >
                   Initialize User
                 </Button>
               )}
-
             </div>
           ) : (
             <Button
@@ -115,7 +105,6 @@ export const Dashboard = () => {
         <div className="pt-3">
           {/* <h1 className="title">The Blog</h1> */}
           <div className="row">
-
             <article className="best-post">
               <div
                 className="best-post-image"
@@ -124,12 +113,21 @@ export const Dashboard = () => {
                 }}
               ></div>
               <div className="best-post-content">
-                <div className="best-post-content-cat">December 2, 2021<span className="dot"> </span>Blog</div>
+                <div className="best-post-content-cat">
+                  December 2, 2021<span className="dot"> </span>Blog
+                </div>
                 <div className="best-post-content-title">
                   Lorem ipsum dolor sit amet, consectetur
                 </div>
                 <div className="best-post-content-sub">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                  irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                  cupidatat non proident, sunt in culpa qui officia deserunt
+                  mollit anim id est laborum.
                 </div>
               </div>
             </article>
@@ -137,9 +135,10 @@ export const Dashboard = () => {
             <div className="all__posts">
               {posts.map((item) => {
                 return (
-                  <article className="post__card-2"
+                  <article
+                    className="post__card-2"
                     onClick={() => {
-                      history.push(`/read-post/${item.publicKey.toString()}`)
+                      history.push(`/read-post/${item.publicKey.toString()}`);
                     }}
                     key={item.account.id}
                   >
@@ -152,7 +151,10 @@ export const Dashboard = () => {
                       ></div>
                       <div>
                         <div className="post__card_meta-2">
-                          <div className="post__card_cat">December 2, 2021<span className="dot"> </span>{item.account.title} </div>
+                          <div className="post__card_cat">
+                            December 2, 2021<span className="dot"> </span>
+                            {item.account.title}{" "}
+                          </div>
                           <p className="post__card_alttitle-2">
                             {item.account.content}
                           </p>
@@ -160,16 +162,16 @@ export const Dashboard = () => {
                       </div>
                     </div>
                   </article>
-                )
+                );
               })}
             </div>
           </div>
         </div>
-        <div className={`modal ${showModal && 'show-modal'}`} >
+        <div className={`modal ${showModal && "show-modal"}`}>
           <div className="modal-content">
-            <span className="close-button"
-              onClick={() => setShowModal(false)}
-            >×</span>
+            <span className="close-button" onClick={() => setShowModal(false)}>
+              ×
+            </span>
             <PostForm
               postTitle={postTitle}
               postContent={postContent}
@@ -181,5 +183,5 @@ export const Dashboard = () => {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};

@@ -29,48 +29,60 @@ export const useBlog = () => {
 };
 
 export const BlogProvider = ({ children }) => {
-  const [user,setUser] =useState()
-  const [initialized,setInitialized] =useState(false)
-  const [transactionPending,setTransactionPending] = useState(false)
+  const [user, setUser] = useState();
+  const [initialized, setInitialized] = useState(false);
+  const [transactionPending, setTransactionPending] = useState(false);
   const anchorWallet = useAnchorWallet();
   const { connection } = useConnection();
-  const { publicKey } = useWallet()
+  const { publicKey } = useWallet();
+  const [showModal, setShowModal] = useState(false);
+  const [LastPostId, setLastPostId] = useState(0);
 
   const program = useMemo(() => {
     if (anchorWallet) {
-      const provider = new anchor.AnchorProvider(connection, anchorWallet, anchor.AnchorProvider.defaultOptions())
-      return new anchor.Program(idl, PROGRAM_KEY, provider)
+      const provider = new anchor.AnchorProvider(
+        connection,
+        anchorWallet,
+        anchor.AnchorProvider.defaultOptions()
+      );
+      return new anchor.Program(idl, PROGRAM_KEY, provider);
     }
-  }, [connection, anchorWallet])
+  }, [connection, anchorWallet]);
 
   useEffect(() => {
     const start = async () => {
       if (program && publicKey) {
         try {
-          setTransactionPending(true)
-          const [userPda] = await findProgramAddressSync([utf8.encode('user'), publicKey.toBuffer()], program.programId)
-          const user = await program.account.userAccount.fetch(userPda)
-          if(user){
-            setInitialized(true)
-            setUser(user)
+          //setTransactionPending(true)
+          const [userPda] = await findProgramAddressSync(
+            [utf8.encode("user"), publicKey.toBuffer()],
+            program.programId
+          );
+          const user = await program.account.userAccount.fetch(userPda);
+          if (user) {
+            setInitialized(true);
+            setUser(user);
+            setLastPostId(user.LastPostId);
           }
         } catch (err) {
-          console.log("No User")
-          setInitialized(false)
-        }finally{
-          setTransactionPending(false)
+          console.log("No User");
+          setInitialized(false);
+        } finally {
+          //setTransactionPending(false)
         }
       }
-    }
-    start()
-  },[program, publicKey, transactionPending] )
-
+    };
+    start();
+  }, [program, publicKey, transactionPending]);
 
   const initUser = async () => {
     if (program && publicKey) {
       try {
-        setTransactionPending(true)
-        const [userPda] = findProgramAddressSync([utf8.encode('user'), publicKey.toBuffer()], program.programId)
+        setTransactionPending(true);
+        const [userPda] = findProgramAddressSync(
+          [utf8.encode("user"), publicKey.toBuffer()],
+          program.programId
+        );
         const name = getRandomName();
         const avatar = getAvatarUrl(name);
 
@@ -81,23 +93,60 @@ export const BlogProvider = ({ children }) => {
             authority: publicKey,
             systemProgram: SystemProgram.programId,
           })
-          .rpc()
-        setInitialized(true)
+          .rpc();
+        setInitialized(true);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       } finally {
-        setTransactionPending(false)
+        setTransactionPending(false);
       }
     }
-  }
+    programId;
+  };
+
+  const createPost = async (title, content) => {
+    if (program && publicKey) {
+      setTransactionPending(true);
+      try {
+        const [userPda] = findProgramAddressSync(
+          [utf8.encode("user"), publicKey.toBuffer()],
+          program.programId
+        );
+        const [postPda] = findProgramAddressSync(
+          [
+            utf8.encode("post"),
+            publicKey.toBuffer(),
+            Uint8Array.from([LastPostId]),
+          ],
+          program.programId
+        );
+        await program.methods
+          .createPost(title, content)
+          .accounts({
+            postAccount: postPda,
+            userAccount: userPda,
+            authority: publicKey,
+            systemProgram: SystemProgram.programId,
+          })
+          .rpc();
+        setShowModal(false);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setTransactionPending(false);
+      }
+    }
+  };
 
   return (
     <BlogContext.Provider
       value={{
         user,
-        
         initialized,
         initUser,
+        showModal,
+        setShowModal,
+        createPost,
       }}
     >
       {children}
