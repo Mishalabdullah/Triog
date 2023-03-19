@@ -52,6 +52,7 @@ export const BlogProvider = ({ children }) => {
           const user = await program.account.userAccount.fetch(userPda)
           if(user){
             setInitialized(true)
+            setUser(user)
           }
         } catch (err) {
           console.log("No User")
@@ -63,6 +64,7 @@ export const BlogProvider = ({ children }) => {
     }
     start()
   },[program, publicKey, transactionPending] )
+
 
   const initUser = async () => {
     if (program && publicKey) {
@@ -89,6 +91,16 @@ export const BlogProvider = ({ children }) => {
     }
   }
 
-
-  return <BlogContext.Provider value={{user,initialized,initUser}}>{children}</BlogContext.Provider>;
+  return (
+    <BlogContext.Provider
+      value={{
+        user,
+        
+        initialized,
+        initUser,
+      }}
+    >
+      {children}
+    </BlogContext.Provider>
+  );
 };
