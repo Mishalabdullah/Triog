@@ -115,7 +115,7 @@ export const Dashboard = () => {
               <div
                 className="best-post-image"
                 style={{
-                  backgroundImage: `url("https://user-images.githubusercontent.com/62637513/184338364-a14b7272-d1dc-49f3-9f43-3ac37dacbe85.png")`,
+                  backgroundImage: `url("https://github.com/Mishalabdullah/Triog/blob/main/app/src/assets/triog.jpg?raw=true")`,
                 }}
               ></div>
               <div className="best-post-content">
