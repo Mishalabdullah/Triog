@@ -115,25 +115,15 @@ export const Dashboard = () => {
               <div
                 className="best-post-image"
                 style={{
-                  backgroundImage: `url("https://user-images.githubusercontent.com/62637513/184338364-a14b7272-d1dc-49f3-9f43-3ac37dacbe85.png")`,
+                  backgroundImage: "url(/trishul.png)",
                 }}
               ></div>
               <div className="best-post-content">
-                <div className="best-post-content-cat">
-                  December 2, 2021<span className="dot"> </span>Blog
-                </div>
                 <div className="best-post-content-title">
-                  Lorem ipsum dolor sit amet, consectetur
+                 Welcome To Triog !!! 
                 </div>
                 <div className="best-post-content-sub">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
+                    Welcome to Triog, the ultimate blogging platform for those who value privacy and security. We understand that in today's digital age, protecting your personal data and online identity is more important than ever. That's why we have created a platform that prioritizes your privacy and ensures that your content is always safe and secure. With Triog, you can express yourself freely, without the worry of being tracked or having your data compromised. Our platform is built on web3 technology, providing you with the peace of mind that comes with decentralized, blockchain-based systems. So, whether you're a blogger, writer, or content creator, join us on Triog and start sharing your voice with the world, while keeping your privacy intact.             
                 </div>
               </div>
             </article>
@@ -158,8 +148,9 @@ export const Dashboard = () => {
                       <div>
                         <div className="post__card_meta-2">
                           <div className="post__card_cat">
-                            December 2, 2021<span className="dot"> </span>
+                            <span className="dot"> </span>
                             {item.account.title}{" "}
+                             
                           </div>
                           <p className="post__card_alttitle-2">
                             {item.account.content}

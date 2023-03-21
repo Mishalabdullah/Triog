@@ -81,11 +81,9 @@ a {
 
 .best-post-content-sub {
   font-size: 15px;
-  line-height: 1.4;
   color: #725c7a;
   text-overflow: ellipsis;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+   -webkit-line-clamp: 4;
   display: -webkit-box;
 
   overflow: hidden;
