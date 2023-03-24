@@ -54,11 +54,7 @@ export const FullPost = () => {
       <h1 className="entry-title">{post?.title}</h1>
       <div className="entry-meta">
         <p>
-          <span className="author">
-            Written by <a href="#">Lavi Perchik</a>
-          </span>{" "}
-          <span className="date"></span>
-        </p>
+           </p>
       </div>
       <div className="entry-content">
         <p>{post?.content}</p>
