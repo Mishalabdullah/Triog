@@ -1,6 +1,5 @@
 # Triog
-
-https://www.youtube.com/watch?v=PKdr3Tiqd7c
+![](/trioghome.png)
 
 Triog is web3 blogging platform that focuses on user privacy and security of individuals.   
 
