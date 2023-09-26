@@ -5,4 +5,4 @@
     <b>Triog is private by default and what's why triog is desinged in way that only one walltet can post a single blog.
 
 ## Youtube Video
-[Watch The Youtube Video]([url](https://www.youtube.com/watch?v=PKdr3Tiqd7c)https://www.youtube.com/watch?v=PKdr3Tiqd7c)
+[Watch The Youtube Video](https://www.youtube.com/watch?v=PKdr3Tiqd7c)
